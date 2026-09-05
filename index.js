@@ -1,37 +1,71 @@
 const http = require('http');
 
-function calculatePiNilakantha(iterations, decimals) {
-    if (!Number.isInteger(iterations) || iterations <= 0) {
-        throw new Error("Количество итераций должно быть положительным целым числом.");
+function calculatePi(decimals) {
+    const scale = 10n ** BigInt(decimals + 10);
+    let pi = 0n;
+    let sign = 1n;
+    const iterations = 1000000;
+    
+    for (let i = 0n; i < BigInt(iterations); i++) {
+        const term = scale / (2n * i + 1n);
+        pi += sign * term;
+        sign = -sign;
     }
-    if (!Number.isInteger(decimals) || decimals < 0 || decimals > 20) {
-        throw new Error("Количество знаков должно быть целым числом от 0 до 20.");
+    pi = pi * 4n;
+    
+    let piStr = pi.toString();
+    if (piStr.length <= decimals) {
+        piStr = '0'.repeat(decimals - piStr.length + 1) + piStr;
     }
+    const integerPart = piStr.slice(0, -decimals) || '0';
+    const decimalPart = piStr.slice(-decimals);
+    return `${integerPart}.${decimalPart}`;
+}
 
-    let pi = 3;
-    let sign = 1;
-
-    for (let i = 2; i < 2 * iterations; i += 2) {
-        pi += sign * (4 / (i * (i + 1) * (i + 2)));
-        sign *= -1;
+function findNumberInPi(target, digits) {
+    const piString = calculatePi(digits + 100);
+    const targetStr = target.toString();
+    const index = piString.indexOf(targetStr);
+    
+    if (index !== -1) {
+        const start = Math.max(0, index - 15);
+        const end = Math.min(piString.length, index + targetStr.length + 15);
+        return {
+            found: true,
+            position: index,
+            context: piString.substring(start, end),
+            fullPi: piString.substring(0, 100) + '...'
+        };
     }
-
-    return pi.toFixed(decimals);
+    return {
+        found: false,
+        fullPi: piString.substring(0, 100) + '...'
+    };
 }
 
 const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-
-    const fio = 'Черепович Владислав Дмитриевич';
-    const group = '401';
-    const piValue = calculatePiNilakantha(1_000_000, 10);
-
-    const html = `
-        <h1>${fio}</h1>
-        <p>Группа: ${group}</p>
-        <p>Число π (10 знаков): ${piValue}</p>
+    const result = findNumberInPi(19, 2000);
+    
+    let html = `
+        <h1>Черепович Владислав Дмитриевич</h1>
+        <h2>Группа: 401</h2>
+        <h3>Поиск числа 19 в числе Пи:</h3>
     `;
-
+    
+    if (result.found) {
+        html += `
+            <p>Число 19 найдено на позиции ${result.position}</p>
+            <p>Контекст: ...${result.context}...</p>
+            <p>Начало Пи: ${result.fullPi}</p>
+        `;
+    } else {
+        html += `
+            <p>Число 19 не найдено</p>
+            <p>Начало Пи: ${result.fullPi}</p>
+        `;
+    }
+    
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(html);
 });
 
