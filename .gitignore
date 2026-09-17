@@ -1,4 +1,10 @@
- node_modules/ 
-.env
- 
-.DS_Store 
+node_modules/
+
+student_*.txt
+project_*/
+data_*.txt
+processed_*.txt
+source_*/
+backup_*/
+sync_report_*.txt
+report_*.json
