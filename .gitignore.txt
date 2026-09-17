@@ -1,0 +1,7 @@
+node_modules/
+test-data/
+test-data-promises/
+test-data-hybrid/
+bench-data/
+*.log
+.DS_Store
