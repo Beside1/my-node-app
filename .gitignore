@@ -7,4 +7,4 @@ processed_*.txt
 source_*/
 backup_*/
 sync_report_*.txt
-report_*.json
+report_*.jsonnode_modules/
