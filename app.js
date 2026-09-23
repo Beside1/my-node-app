@@ -153,7 +153,7 @@ router.get('/', (ctx) => {
       body { font-family: Arial, sans-serif; background: #f4f6f8; padding: 40px; }
       .card { background: #fff; padding: 30px; border-radius: 12px;
               max-width: 600px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-      h1 { color: #2c3e50; } .group { color: #000000; font-weight: bold; }
+      h1 { color: #2c3e50; } .group { color: #ff0000; font-weight: bold; }
       .date { color: #7f8c8d; font-size: 14px; }
     </style></head>
     <body><div class="card">
@@ -166,10 +166,65 @@ router.get('/', (ctx) => {
   `;
 });
 
+//zadanie2//
+
+router.get('/api/users', (ctx) => {
+  ctx.body = users;
+});
+
+router.post('/api/users', (ctx) => {
+  const { name, group } = ctx.request.body || {};
+
+  if (!name || !group) {
+    ctx.status = 400;
+    ctx.body = { error: 'Поля name и group обязательны', status: 400 };
+    return;
+  }
+
+  const user = { id: nextId++, name, group };
+  users.push(user);
+  ctx.status = 201;
+  ctx.body = user;
+});
+
+router.put('/api/users/:id', (ctx) => {
+  const id = Number(ctx.params.id);
+  const user = users.find((u) => u.id === id);
+
+  if (!user) {
+    ctx.status = 404;
+    ctx.body = { error: 'Пользователь не найден', status: 404 };
+    return;
+  }
+
+  const { name, group } = ctx.request.body || {};
+  if (!name || !group) {
+    ctx.status = 400;
+    ctx.body = { error: 'Поля name и group обязательны', status: 400 };
+    return;
+  }
+
+  user.name = name;
+  user.group = group;
+  ctx.body = user;
+});
+
+router.delete('/api/users/:id', (ctx) => {
+  const id = Number(ctx.params.id);
+  const index = users.findIndex((u) => u.id === id);
+
+  if (index === -1) {
+    ctx.status = 404;
+    ctx.body = { error: 'Пользователь не найден', status: 404 };
+    return;
+  }
+
+  users.splice(index, 1);
+  ctx.body = { message: `Пользователь id=${id} успешно удалён` };
+});
+
 app.use(router.routes()).use(router.allowedMethods());
-app.on('error', (err) => console.error('ошибка', err.message));
 
 app.listen(3000, () => {
-  console.log('Сервер: http://localhost:3000');
-  console.log(`Сгенерировано студентов: ${students.length}`);
+  console.log('✅ Сервер: http://localhost:3000');
 });
