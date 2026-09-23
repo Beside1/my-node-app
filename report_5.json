@@ -1,0 +1,155 @@
+{
+  "variant": 5,
+  "directory": ".",
+  "scannedAt": "2026-09-19T08:49:53.675Z",
+  "totals": {
+    "folders": 97,
+    "files": 220,
+    "sizeBytes": 25779527,
+    "sizeKB": 25175.32,
+    "sizeMB": 24.59
+  },
+  "ignored": {
+    "rule": "файлы размером более 10 МБ (варианты 1–5)",
+    "count": 0,
+    "files": []
+  },
+  "byExtension": [
+    {
+      "extension": ".txt",
+      "count": 26,
+      "sizeBytes": 4180794,
+      "sizeHuman": "3.99 МБ"
+    },
+    {
+      "extension": ".gif",
+      "count": 4,
+      "sizeBytes": 3440640,
+      "sizeHuman": "3.28 МБ"
+    },
+    {
+      "extension": ".png",
+      "count": 8,
+      "sizeBytes": 3256320,
+      "sizeHuman": "3.11 МБ"
+    },
+    {
+      "extension": ".log",
+      "count": 4,
+      "sizeBytes": 3254106,
+      "sizeHuman": "3.10 МБ"
+    },
+    {
+      "extension": ".jpg",
+      "count": 4,
+      "sizeBytes": 2949120,
+      "sizeHuman": "2.81 МБ"
+    },
+    {
+      "extension": ".html",
+      "count": 4,
+      "sizeBytes": 2384968,
+      "sizeHuman": "2.27 МБ"
+    },
+    {
+      "extension": ".css",
+      "count": 4,
+      "sizeBytes": 2167669,
+      "sizeHuman": "2.07 МБ"
+    },
+    {
+      "extension": ".md",
+      "count": 10,
+      "sizeBytes": 2058383,
+      "sizeHuman": "1.96 МБ"
+    },
+    {
+      "extension": ".js",
+      "count": 39,
+      "sizeBytes": 1606078,
+      "sizeHuman": "1.53 МБ"
+    },
+    {
+      "extension": "(без расширения)",
+      "count": 94,
+      "sizeBytes": 438579,
+      "sizeHuman": "428.3 КБ"
+    },
+    {
+      "extension": ".sample",
+      "count": 14,
+      "sizeBytes": 25827,
+      "sizeHuman": "25.2 КБ"
+    },
+    {
+      "extension": ".json",
+      "count": 9,
+      "sizeBytes": 17043,
+      "sizeHuman": "16.6 КБ"
+    }
+  ],
+  "top5Largest": [
+    {
+      "name": "data_5.txt",
+      "path": "./data_5.txt",
+      "size": 2878124,
+      "sizeHuman": "2.74 МБ"
+    },
+    {
+      "name": "file_20.log",
+      "path": "./source_5/file_20.log",
+      "size": 1228818,
+      "sizeHuman": "1.17 МБ"
+    },
+    {
+      "name": "file_19.gif",
+      "path": "./backup_5/file_19.gif",
+      "size": 1167360,
+      "sizeHuman": "1.11 МБ"
+    },
+    {
+      "name": "file_19.gif",
+      "path": "./source_5/file_19.gif",
+      "size": 1167360,
+      "sizeHuman": "1.11 МБ"
+    },
+    {
+      "name": "file_18.png",
+      "path": "./backup_5/file_18.png",
+      "size": 1105920,
+      "sizeHuman": "1.05 МБ"
+    }
+  ],
+  "top5Smallest": [
+    {
+      "name": "commondir",
+      "path": "./.git/worktrees/platinum-cephalopod/commondir",
+      "size": 6,
+      "sizeHuman": "6 Б"
+    },
+    {
+      "name": "b.txt",
+      "path": "./.kilo/worktrees/platinum-cephalopod/test-data-hybrid/b.txt",
+      "size": 8,
+      "sizeHuman": "8 Б"
+    },
+    {
+      "name": "b.txt",
+      "path": "./test-data-hybrid/b.txt",
+      "size": 8,
+      "sizeHuman": "8 Б"
+    },
+    {
+      "name": "a.txt",
+      "path": "./.kilo/worktrees/platinum-cephalopod/test-data-hybrid/a.txt",
+      "size": 12,
+      "sizeHuman": "12 Б"
+    },
+    {
+      "name": "a.txt",
+      "path": "./test-data-hybrid/a.txt",
+      "size": 12,
+      "sizeHuman": "12 Б"
+    }
+  ]
+}

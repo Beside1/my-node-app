@@ -12,10 +12,6 @@ const path = require('path');
 const VARIANT = 5;
 const ROOT = path.join(__dirname, `project_${VARIANT}`);
 
-/**
- * 
- * 
- */
 const STRUCTURE = {
   src: {
     info: 'Исходный код проекта',
