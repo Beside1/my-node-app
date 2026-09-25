@@ -46,20 +46,6 @@ router.get('/api/users', (ctx) => {
   ctx.body = users;
 });
 
-router.post('/api/users', (ctx) => {
-  const { name, group } = ctx.request.body || {};
-
-  if (!name || !group) {
-    ctx.throw(400, 'Поля name и group обязательны');
-  }
-
-  const user = { id: nextId++, name, group };
-  users.push(user);
-
-  ctx.status = 201;
-  ctx.body = user;
-});
-
 router.put('/api/users/:id', (ctx) => {
   const user = users.find((u) => u.id === Number(ctx.params.id));
 
@@ -75,6 +61,31 @@ router.put('/api/users/:id', (ctx) => {
 
   user.name = name;
   user.group = group;
+
+  ctx.body = user;
+});
+
+router.post('/api/users', (ctx) => {
+  const { name, group } = ctx.request.body || {};
+
+  if (!name || !group) {
+    ctx.throw(400, 'Поля name и group обязательны');
+  }
+
+  const user = { id: nextId++, name, group };
+  users.push(user);
+
+  ctx.status = 201;
+  ctx.body = user;
+});
+
+
+router.get('/api/users/:id', (ctx) => {
+  const user = users.find((u) => u.id === Number(ctx.params.id));
+
+  if (!user) {
+    ctx.throw(404, 'Пользователь не найден');
+  }
 
   ctx.body = user;
 });
