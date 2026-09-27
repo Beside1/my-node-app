@@ -9,3 +9,5 @@ backup_*/
 sync_report_*.txt
 report_*.jsonoperations.log
 *.log
+operations.log
+*.log
