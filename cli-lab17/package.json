@@ -1,0 +1,20 @@
+{
+  "name": "my-cli",
+  "version": "1.0.0",
+  "description": "CLI-приложение для лабораторной работы №17 (группа 401)",
+  "main": "bin/index.js",
+  "bin": {
+    "my-cli": "./bin/index.js"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "start": "node bin/index.js",
+    "test": "jest"
+  },
+  "author": "Черепович Владислав Дмитриевич",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^15.0.0",
+    "inquirer": "^14.2.2"
+  }
+}
