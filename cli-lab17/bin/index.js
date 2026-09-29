@@ -83,5 +83,105 @@ program
   });
 
 
+program
+  .command('init')
+  .description('инициализировать новый проект')
+  .option('--name <name>', 'название проекта')
+  .option('--type <type>', 'тип проекта: web | cli | lib | micro')
+  .option('--typescript', 'добавить TypeScript')
+  .option('--eslint', 'добавить ESLint')
+  .option('--prettier', 'добавить Prettier')
+  .option('--jest', 'добавить Jest')
+  .option('--git', 'инициализировать Git')
+  .option('--token <token>', 'токен доступа')
+  .option('--no-interactive', 'отключить интерактивный режим')
+  .action(async (options) => {
+
+    const hasAllFlags = options.name && options.type;
+
+
+    if (options.interactive === false) {
+      if (!options.name || !options.type) {
+        console.error('Ошибка: в неинтерактивном режиме необходимо указать --name и --type');
+        process.exit(1);
+      }
+      printInitResult(options);
+      return;
+    }
+
+
+    if (!hasAllFlags) {
+      const { default: inquirer } = await import('inquirer');
+
+      const answers = await inquirer.prompt([
+        {
+          type: 'input',
+          name: 'name',
+          message: 'Введите название проекта:',
+          default: 'my-project',
+          when: !options.name,
+        },
+        {
+ 	  type: 'select',   
+	  name: 'type',
+          message: 'Выберите тип проекта:',
+          choices: [
+            { name: 'Web-приложение', value: 'web' },
+            { name: 'CLI-утилита',    value: 'cli' },
+            { name: 'Библиотека',      value: 'lib' },
+            { name: 'Микросервис',     value: 'micro' },
+          ],
+          when: !options.type,
+        },
+        {
+          type: 'checkbox',
+          name: 'features',
+          message: 'Выберите дополнительные опции:',
+          choices: [
+            { name: 'TypeScript', value: 'typescript' },
+            { name: 'ESLint',     value: 'eslint' },
+            { name: 'Prettier',   value: 'prettier' },
+            { name: 'Jest',       value: 'jest' },
+          ],
+          when: !options.typescript && !options.eslint && !options.prettier && !options.jest,
+        },
+        {
+          type: 'confirm',
+          name: 'git',
+          message: 'Использовать Git?',
+          default: true,
+          when: options.git === undefined,
+        },
+        {
+          type: 'password',
+          name: 'token',
+          message: 'Введите токен доступа:',
+          mask: '*',
+          when: !options.token,
+        },
+      ]);
+
+      Object.assign(options, answers);
+      if (answers.features) {
+        for (const f of answers.features) options[f] = true;
+      }
+    }
+
+    printInitResult(options);
+  });
+
+function printInitResult(opts) {
+  const features = [];
+  if (opts.typescript) features.push('TypeScript');
+  if (opts.eslint)     features.push('ESLint');
+  if (opts.prettier)   features.push('Prettier');
+  if (opts.jest)       features.push('Jest');
+
+  console.log(`  Проект "${opts.name}" успешно инициализирован!`);
+  console.log(`  Тип: ${opts.type}`);
+  console.log(`  Опции: ${features.length ? features.join(', ') : '—'}`);
+  console.log(`  Git: ${opts.git ? 'да' : 'нет'}`);
+}
+
 program.showHelpAfterError('(используйте --help для справки)');
 program.parse(process.argv);
