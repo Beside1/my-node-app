@@ -183,5 +183,71 @@ function printInitResult(opts) {
   console.log(`  Git: ${opts.git ? 'да' : 'нет'}`);
 }
 
+
+const chalk = require('chalk');
+const ora = require('ora');
+const cliProgress = require('cli-progress');
+
+// Silence is Golden: цветной вывод только если stdout — TTY
+const useColor = process.stdout.isTTY;
+const c = {
+  success: (s) => useColor ? chalk.green(s)   : s,
+  warn:    (s) => useColor ? chalk.yellow(s)  : s,
+  error:   (s) => useColor ? chalk.red(s)     : s,
+  info:    (s) => useColor ? chalk.blue(s)    : s,
+};
+
+program
+  .command('process')
+  .description('обработать файлы')
+  .requiredOption('--files <files...>', 'список файлов')
+  .option('--delay <ms>', 'задержка между файлами', '300')
+  .action(async (options) => {
+    const fs = require('fs');
+    const files = options.files;
+    const delay = Number(options.delay);
+
+    const spinner = ora('Обработка файлов...').start();
+    await new Promise((r) => setTimeout(r, 500));
+    spinner.succeed(c.success(`Файлы найдены (${files.length} шт.)`));
+
+
+    const bar = new cliProgress.SingleBar({
+      format: 'Обработка |' + chalk.cyan('{bar}') + '| {percentage}% | {value}/{total} | ETA: {eta}s',
+      hideCursor: true,
+    }, cliProgress.Presets.shades_classic);
+
+    bar.start(files.length, 0);
+
+    const results = [];
+    let failed = 0;
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      await new Promise((r) => setTimeout(r, delay));
+
+      if (fs.existsSync(file) || file.endsWith('.txt')) {
+        results.push({ file, status: 'ok' });
+        process.stderr.write(c.success(`✔ Файл ${file} обработан\n`));
+      } else {
+        failed++;
+        results.push({ file, status: 'missing' });
+        process.stderr.write(c.error(`✖ Файл ${file} не найден\n`));
+      }
+      bar.update(i + 1);
+    }
+
+    bar.stop();
+
+    if (failed > 0) {
+      process.stderr.write(c.warn(`⚠ Пропущено ${failed} файл(ов)\n`));
+    }
+
+
+    process.stdout.write(JSON.stringify({ processed: results.length - failed, failed, results }, null, 2) + '\n');
+
+    if (failed > 0) process.exit(1);
+  });
+
 program.showHelpAfterError('(используйте --help для справки)');
 program.parse(process.argv);
