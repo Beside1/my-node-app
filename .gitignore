@@ -7,4 +7,10 @@ processed_*.txt
 source_*/
 backup_*/
 sync_report_*.txt
-report_*.json
+report_*.jsoncli-lab17/node_modules/
+cli-lab17/dist/
+cli-lab17/*.exe
+cli-lab17/node_modules/
+cli-lab17/dist/
+cli-lab17/*.exe
+*.log
