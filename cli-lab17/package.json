@@ -12,5 +12,8 @@
     "test": "jest"
   },
   "author": "Черепович Владислав Дмитриевич",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^15.0.0"
+  }
 }
