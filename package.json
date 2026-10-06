@@ -1,10 +1,12 @@
 {
   "name": "my-node-app",
   "version": "1.0.0",
-  "description": "Лабораторная работа №12: EventEmitter и цикл событий",
-  "main": "index.js",
+  "description": "Лабораторные работы по Node.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/server.js",
+    "migrate": "node src/migrations/runner.js",
+    "migrate:rollback": "node src/migrations/runner.js rollback",
     "demo": "node event-loop-demo.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
