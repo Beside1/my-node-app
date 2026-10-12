@@ -7,7 +7,12 @@ processed_*.txt
 source_*/
 backup_*/
 sync_report_*.txt
-report_*.jsonoperations.log
+report_*.jsonnode_modules/
+.env
 *.log
-operations.log
-*.log
+output-*.txt
+students-timeout.csv
+access.log
+monitor.log
+errors.log
+..cli-lab17-backup/
