@@ -24,7 +24,9 @@
     "koa": "^3.2.1",
     "koa-bodyparser": "^4.4.1",
     "koa-router": "^14.0.0",
+    "mongodb": "^7.9.0",
     "mysql2": "^3.24.5",
-    "selfsigned": "^5.5.0"
+    "selfsigned": "^5.5.0",
+    "ws": "^8.23.0"
   }
 }
