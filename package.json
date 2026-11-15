@@ -1,39 +1,30 @@
 {
   "name": "my-node-app",
   "version": "1.0.0",
-  "description": "Лабораторная работа №12: EventEmitter и цикл событий",
-  "main": "index.js",
+  "description": "Лабораторные работы по Node.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node index.js",
-    "demo": "node event-loop-demo.js",
+    "start": "node src/server.js",
+    "migrate": "node src/migrations/runner.js",
+    "migrate:rollback": "node src/migrations/runner.js rollback",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Beside1/my-node-app.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Beside1/my-node-app/issues"
-  },
-  "homepage": "https://github.com/Beside1/my-node-app#readme",
   "dependencies": {
     "@koa/cors": "^5.0.0",
-    "bcryptjs": "^3.0.3",
+    "@koa/router": "^15.7.0",
     "chalk": "^4.1.2",
-    "compression": "^1.8.2",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.7.0",
-    "joi": "^18.2.9",
-    "jsonwebtoken": "^9.0.3",
+    "dotenv": "^18.0.5",
     "koa": "^3.2.1",
     "koa-bodyparser": "^4.4.1",
     "koa-router": "^14.0.0",
-    "selfsigned": "^5.5.0",
-    "swagger-jsdoc": "^6.3.0",
-    "swagger-ui-express": "^5.0.1"
+    "mysql2": "^3.24.5",
+    "selfsigned": "^5.5.0"
   }
 }

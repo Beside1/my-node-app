@@ -10,3 +10,7 @@ operations.log
 cli-lab17/node_modules/
 cli-lab17/dist/
 cli-lab17/*.exe
+.env
+cert/
+*.log
+students.csv
